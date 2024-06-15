@@ -1,0 +1,29 @@
+import { defineStore } from 'pinia'
+import { computed, ref } from 'vue'
+
+export const useInputsStore = defineStore('inputs', () => {
+  const inputs = ref<(string | undefined)[]>([undefined, undefined, undefined])
+  const search = ref<string | undefined>(undefined)
+
+  const searchMatches = computed(() => {
+    for (const item of inputs.value) {
+      if (!item || !search.value) continue
+      if (item.includes(search.value.trim())) return true
+    }
+    return false
+  })
+
+  function addInput() {
+    inputs.value.push(undefined)
+  }
+
+  function updateInput(index: number, value: string | undefined) {
+    inputs.value[index] = value
+  }
+
+  function removeInput(index: number) {
+    inputs.value.splice(index, 1)
+  }
+
+  return { inputs, search, searchMatches, addInput, updateInput, removeInput }
+})
