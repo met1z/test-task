@@ -22,7 +22,7 @@ const countVowel = (v?: string) => {
 
 const checkItemMatch = (v?: string) => {
   if (!v || !search.value) return false
-  else return v.includes(search.value.trim())
+  else return v.toLowerCase().includes(search.value.toLowerCase().trim())
 }
 
 const validateInputs = (v: 'add' | 'remove', index?: number) => {
