@@ -6,8 +6,9 @@ export const useInputsStore = defineStore('inputs', () => {
   const search = ref<string | undefined>(undefined)
 
   const searchMatches = computed(() => {
+    if (!search.value) return false
     for (const item of inputs.value) {
-      if (!item || !search.value) continue
+      if (!item) continue
       if (item.toLowerCase().includes(search.value.toLowerCase().trim())) return true
     }
     return false
